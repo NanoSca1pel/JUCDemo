@@ -39,7 +39,7 @@ public class SingletonDemo {
 //        System.out.println();
 
 
-        //兵法多线程后，情况发生了很大的变化
+        //并发多线程后，情况发生了很大的变化
         for (int i=1; i<=10; i++) {
             new Thread(() -> {
                 SingletonDemo.getInstance();
