@@ -72,7 +72,7 @@ class Phone  implements Runnable{
  *
  * @date 2019-04-25 15:12
  */
-public class ReenterLockDemo {
+public class ReentrantLockDemo {
 
     public static void main(String[] args){
 

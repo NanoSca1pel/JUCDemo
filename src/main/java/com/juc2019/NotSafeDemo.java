@@ -1,4 +1,4 @@
-package com.juc201904;
+package com.juc2019;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
