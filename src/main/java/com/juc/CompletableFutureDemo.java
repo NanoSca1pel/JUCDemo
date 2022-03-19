@@ -1,5 +1,6 @@
 package com.juc;
 
+import cn.hutool.core.lang.Assert;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -236,7 +237,7 @@ public class CompletableFutureDemo {
         System.out.println(Runtime.getRuntime().availableProcessors());
     }*/
 
-    public static void main(String[] args) throws Exception {
+    /*public static void main(String[] args) throws Exception {
         ExecutorService threadPool = Executors.newCachedThreadPool();
 
         printTimeAndThread("李杰和小伙伴们 进入餐厅点菜");
@@ -253,6 +254,24 @@ public class CompletableFutureDemo {
         
         printTimeAndThread("菜都做好了,上桌 " + (System.currentTimeMillis() - startTime));
 
+    }*/
+
+    public static void main(String[] args) throws Exception {
+        CompletableFuture<String> future = CompletableFuture.completedFuture("hello!")
+                .thenApply(s -> s + "world!");
+        String s1 = future.get();
+        System.out.println(s1);
+        // 这次调用将被忽略。
+        future.thenApply(s -> s + "nice!");
+        String s2 = future.get();
+        System.out.println(s2);
+        //future中断后除非使用新对象接收，否则所有后续调用都会被忽略
+        CompletableFuture<String> future2 = future.thenApply(s -> s + "nice!");
+        System.out.println(future2.get());
+
+        CompletableFuture<String> future3 = CompletableFuture.completedFuture("hello!")
+                .thenApply(s -> s + "world!").thenApply(s -> s + "nice!");
+        System.out.println(future3.get());
     }
 }
 
