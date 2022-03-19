@@ -63,6 +63,18 @@ import java.util.stream.IntStream;
  * thenCompose 方法
  * thenCompose 方法允许你对两个 CompletionStage 进行流水线操作，第一个操作完成时，将其结果作为参数传递给第二个操作。
  *
+ * completeExceptionally 方法
+ * 让 CompletableFuture 的结果就是异常的话，可以使用 completeExceptionally() 方法为其赋值。
+ *
+ * allOf 方法
+ * 并行运行多个 CompletableFuture
+ *
+ * join 方法
+ * 对于allOf多个CompletableFuture任务并行的情况，可以等待所有任务都执行完毕后再继续运行
+ *
+ * anyOf 方法
+ * 不会等待所有的 CompletableFuture 都运行完成之后再返回，只要有一个执行完成即可！
+ *
  *
  * @author lhtao
  * @descript
@@ -256,7 +268,7 @@ public class CompletableFutureDemo {
 
     }*/
 
-    public static void main(String[] args) throws Exception {
+    /*public static void main(String[] args) throws Exception {
         CompletableFuture<String> future = CompletableFuture.completedFuture("hello!")
                 .thenApply(s -> s + "world!");
         String s1 = future.get();
@@ -272,6 +284,20 @@ public class CompletableFutureDemo {
         CompletableFuture<String> future3 = CompletableFuture.completedFuture("hello!")
                 .thenApply(s -> s + "world!").thenApply(s -> s + "nice!");
         System.out.println(future3.get());
+    }*/
+
+    public static void main(String[] args) throws Exception {
+        CompletableFuture<String> completableFuture = new CompletableFuture<>();
+        completableFuture.completeExceptionally(
+                new RuntimeException("Calculation failed!"));
+        try {
+            String s = completableFuture.get();// ExecutionException
+            System.out.println(s);
+        } catch (Exception e) {
+            if ("Calculation failed!".equals(e.getCause().getMessage())) {
+                System.out.println("hello world!");
+            }
+        }
     }
 }
 
