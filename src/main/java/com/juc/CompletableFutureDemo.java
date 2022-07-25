@@ -18,6 +18,7 @@ import java.util.stream.IntStream;
  * supplyAsync可以支持返回值。
  *
  * 计算结果完成时或抛出异常的回调方法
+ * whenComplete 和 whenCompleteAsync 无论是否有异常都会执行
  * whenComplete 和 whenCompleteAsync 的区别：
  * whenComplete：是执行当前任务的线程执行继续执行 whenComplete 的任务。
  * whenCompleteAsync：是执行把 whenCompleteAsync 这个任务继续提交给线程池来进行执行。
